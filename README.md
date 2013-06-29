@@ -1,16 +1,24 @@
 Linux Packer Installer
 ================================================================================
 
-What is this
---------------------------------------------------------------------------------
-
 Download [Packer](http://packer.io) and install tool for Linux.
+
+
+Requirements
+--------------------------------------------------------------------------------
 
 I've tested on Ubuntu 12.04 LTS.
 
 
-Commands
+Getting Started
 --------------------------------------------------------------------------------
+
+Clone this repository:
+
+```sh
+$ git clone git@github.com:Tomohiro/linux-packer-installer
+```
+
 
 Install Packer:
 
@@ -36,3 +44,4 @@ LICENSE
 
 &copy; 2013 Tomohiro TAIRA.
 This project is licensed under the MIT license.
+See LICENSE for details.
