@@ -1,0 +1,84 @@
+#!/bin/sh
+
+set -e
+
+    VERSION='0.1.0'
+
+    setup() {
+      if [ $(uname) != 'Linux' ]; then
+        echo 'Sorry, your platform is not supported.'
+        return 1
+      fi
+    }
+
+
+    architecture() {
+      case "$(uname -i)" in
+        i386)   echo '386' ;;
+        i686)   echo '386' ;;
+        x86_64) echo 'amd64' ;;
+        *)      echo '386' ;;
+      esac
+    }
+
+
+    install_packer() {
+      if [ -d /tmp/packer-download ]; then
+        rm -ri /tmp/packer-download
+      fi
+
+      mkdir /tmp/packer-download
+      cd /tmp/packer-download
+
+      local packer_archive="${VERSION}_linux_$(architecture).zip"
+      download "http://dl.bintray.com/mitchellh/packer/$packer_archive"
+      unzip $packer_archive
+      sudo mv packer* /usr/local/bin/
+      ls -l /usr/local/bin/packer*
+      echo
+      packer --version
+      echo 'Congrats! Packer install finished.'
+    }
+
+
+    uninstall_packer() {
+      sudo rm -i /usr/local/bin/packer*
+      echo 'Packer uninstall finished.'
+    }
+
+
+    download() {
+      local url=$1
+      if type wget > /dev/null; then
+        wget "$url"
+        return 0
+      fi
+
+      if type curl > /dev/null; then
+        curl -LO "$url"
+        return 0
+      fi
+
+      echo 'Download tool not found. You must install `wget` or `curl`.'
+      return 1
+    }
+
+
+    usage() {
+      echo $0
+      echo
+      echo 'Usage: linux-packer-installer COMMAND'
+      echo
+      echo "  install         # Install packer $VERSION"
+      echo "  uninstall       # Uninstall packer"
+      echo '  help, --help    # Shos this usage'
+    }
+
+
+
+case $1 in
+  'help' | '--help') usage ;;
+  'install') install_packer ;;
+  'uninstall') uninstall_packer ;;
+  *) usage ;;
+esac
