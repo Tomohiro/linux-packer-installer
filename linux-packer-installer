@@ -2,7 +2,7 @@
 
 set -e
 
-    VERSION='0.1.0'
+    VERSION=$2
 
     setup() {
       if [ $(uname) != 'Linux' ]; then
@@ -65,13 +65,11 @@ set -e
 
 
     usage() {
-      echo $0
+      echo 'Usage: linux-packer-installer <COMMAND>'
       echo
-      echo 'Usage: linux-packer-installer COMMAND'
-      echo
-      echo "  install         # Install packer $VERSION"
-      echo "  uninstall       # Uninstall packer"
-      echo '  help, --help    # Shos this usage'
+      echo '  install   <version> # Install Packer'
+      echo '  uninstall           # Uninstall Packer'
+      echo '  help, --help        # Shos this usage'
     }
 
 
