@@ -23,7 +23,7 @@ $ git clone git@github.com:Tomohiro/linux-packer-installer
 Install Packer:
 
 ```sh
-$ ./linux-packer-installer install
+$ ./linux-packer-installer install 0.1.4
 ```
 
 Uninstall Packer:
